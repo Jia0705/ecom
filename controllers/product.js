@@ -66,15 +66,6 @@ const deleteProduct = async (id) => {
   return await Product.findByIdAndDelete(id);
 };
 
-const getCategories = async (category) => {
-  let filtered = {};
-  if (category) {
-    filtered.category = category;
-  }
-  const categories = await Product.find(filtered);
-  return categories;
-};
-
 // export all the functions
 module.exports = {
   getProducts,
@@ -82,5 +73,4 @@ module.exports = {
   addNewProduct,
   updateProduct,
   deleteProduct,
-  getCategories,
 };

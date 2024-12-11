@@ -9,7 +9,6 @@ const {
   addNewProduct,
   updateProduct,
   deleteProduct,
-  getCategories,
 } = require("../controllers/product");
 
 /* 
@@ -24,17 +23,6 @@ const {
 
  5. Delete a product by its ID: `DELETE /products/:id`
 */
-
-router.get("/categories", async (req, res) => {
-  try {
-    const categories = await getCategories();
-    res.status(200).send(categories);
-  } catch (error) {
-    res.status(400).send({
-      error: error._message,
-    });
-  }
-});
 
 // get all the products. Pointing to /products
 router.get("/", async (req, res) => {

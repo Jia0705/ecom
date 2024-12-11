@@ -1,12 +1,16 @@
 // import express
 const express = require("express");
 const mongoose = require("mongoose");
+// const cors = require("cors");
 
 // create the express app
 const app = express();
 
 // middleware to handle JSON request
 app.use(express.json());
+
+// setup cors policy
+// app.use(cors());
 
 // connect to MongoDB
 mongoose
@@ -15,20 +19,20 @@ mongoose
     // if mongodb is successfully connected
     console.log("MongoDB is connected");
   })
-
   .catch((error) => {
     console.log(error);
   });
 
 // root route
 app.get("/", (req, res) => {
-  res.send("Happy Coding!");
+  res.send("Happy coding!");
 });
 
 // import all the routes
-const productRouter = require("./routes/product");
+const productRoutes = require("./routes/product");
 
-app.use("/products", productRouter);
+app.use("/products", productRoutes);
+app.use("/categories", require("./routes/category"));
 
 // start the server
 app.listen(5555, () => {
