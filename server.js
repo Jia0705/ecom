@@ -1,7 +1,9 @@
+require("dotenv").config();
+
 // import express
 const express = require("express");
 const mongoose = require("mongoose");
-// const cors = require("cors");
+const cors = require("cors");
 
 // create the express app
 const app = express();
@@ -10,7 +12,10 @@ const app = express();
 app.use(express.json());
 
 // setup cors policy
-// app.use(cors());
+app.use(cors());
+
+// set a folder as a static path
+app.use("/api/uploads", express.static("uploads"));                 
 
 // connect to MongoDB
 mongoose
@@ -24,15 +29,19 @@ mongoose
   });
 
 // root route
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
   res.send("Happy coding!");
 });
 
 // import all the routes
 const productRoutes = require("./routes/product");
 
-app.use("/products", productRoutes);
-app.use("/categories", require("./routes/category"));
+app.use("/api/products", productRoutes);
+app.use("/api/categories", require("./routes/category"));
+app.use("/api/orders", require("./routes/order"));
+app.use("/api/payment", require("./routes/payment"));
+app.use("/api/auth", require("./routes/user"));
+app.use("/api/image", require("./routes/image"))
 
 // start the server
 app.listen(5555, () => {
