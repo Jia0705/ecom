@@ -19,7 +19,7 @@ app.use("/api/uploads", express.static("uploads"));
 
 // connect to MongoDB
 mongoose
-  .connect("mongodb://localhost:27017/ecom")
+  .connect(process.env.MONGODB_URL + "/ecom")
   .then(() => {
     // if mongodb is successfully connected
     console.log("MongoDB is connected");
